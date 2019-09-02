@@ -18,7 +18,8 @@ public class NetworkHandler {
     }
 
     public Boolean isConnected() {
-        boolean result = false; // Returns connection type. 0: none; 1: mobile data; 2: wifi
+
+        boolean result = false;
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (cm != null) {

@@ -24,8 +24,16 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
         this.errorHandler = errorHandler;
     }
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+
+        getViewState().showStartSearchMessage(true);
+    }
+
     public void search(String text) {
         getViewState().showLoading(true);
+        getViewState().showStartSearchMessage(false);
 
         Disposable moviesDisposable =
                 moviesInteractor.getMovies(text)
@@ -39,6 +47,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
 
     private void handleMovies(List<Movie> movies) {
         getViewState().showLoading(false);
+        getViewState().showStartSearchMessage(false);
         getViewState().showMovies(movies);
     }
 

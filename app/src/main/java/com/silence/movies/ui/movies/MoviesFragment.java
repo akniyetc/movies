@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +23,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.silence.movies.App;
-import com.silence.movies.MoviesActivity;
 import com.silence.movies.R;
 import com.silence.movies.domain.entity.Movie;
 import com.silence.movies.presentation.movies.MoviesPresenter;
@@ -38,6 +38,9 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
 
     @BindView(R.id.rvMovies)
     RecyclerView rvMovies;
+
+    @BindView(R.id.tvSearchReminder)
+    TextView tvSearchReminder;
 
     @BindView(R.id.progressMovies)
     ProgressBar progressMovies;
@@ -136,6 +139,11 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
     @Override
     public void showLoading(Boolean show) {
         progressMovies.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showStartSearchMessage(Boolean show) {
+        tvSearchReminder.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     private String getItemAsString(CursorAdapter adapter) {

@@ -5,7 +5,7 @@
     <dimen name="card_view_padding">8dp</dimen>
     <dimen name="card_view_margin">4dp</dimen>
     <dimen name="default_view_padding">8dp</dimen>
-    <dimen name="edit_text_text_size">14sp</dimen>
+    <dimen name="movies_text_view_size">20sp</dimen>
     <dimen name="default_button_height">36dp</dimen>
     <dimen name="poster_height">180dp</dimen>
 </resources>

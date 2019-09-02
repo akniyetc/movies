@@ -10,7 +10,8 @@
         android:id="@+id/rvMovies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_movie"/>
+        tools:listitem="@layout/item_movie"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/progressMovies"
@@ -18,5 +19,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvSearchReminder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/frag_movies_start_searching"
+        android:textSize="@dimen/movies_text_view_size"
+        android:textAlignment="center"
+        android:textAllCaps="true"/>
 
 </FrameLayout>

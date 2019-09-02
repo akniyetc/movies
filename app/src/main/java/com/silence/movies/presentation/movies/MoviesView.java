@@ -16,4 +16,6 @@ public interface MoviesView extends MvpView {
 
     void showMovies(List<Movie> movies);
     void showLoading(Boolean show);
+
+    void showStartSearchMessage(Boolean show);
 }

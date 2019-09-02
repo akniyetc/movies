@@ -1,4 +1,4 @@
-package com.silence.movies;
+package com.silence.movies.ui.movies;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 
+import com.silence.movies.R;
 import com.silence.movies.ui.base.BaseActivity;
 
 import butterknife.BindView;
