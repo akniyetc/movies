@@ -156,4 +156,13 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
 
         App.getInstance().closeMoviesComponent();
     }
+
+    public static MoviesFragment newInstance() {
+
+        Bundle args = new Bundle();
+
+        MoviesFragment fragment = new MoviesFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 }

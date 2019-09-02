@@ -2,6 +2,9 @@ package com.silence.movies.ui.base;
 
 import android.os.Bundle;
 
+import androidx.annotation.IdRes;
+import androidx.fragment.app.Fragment;
+
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import butterknife.ButterKnife;
@@ -20,6 +23,13 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
         setContentView(layoutId());
 
         mUnBinder = ButterKnife.bind(this);
+    }
+
+    public void changeFragment(Fragment fragment, @IdRes int containerId) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerId, fragment)
+                .commitNow();
     }
 
     @Override

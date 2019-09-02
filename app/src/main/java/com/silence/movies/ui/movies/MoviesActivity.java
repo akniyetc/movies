@@ -2,6 +2,7 @@ package com.silence.movies.ui.movies;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,12 +27,20 @@ public class MoviesActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        initToolbar();
+        addMoviesFragment();
+    }
 
+    private void initToolbar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar == null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
+    }
+
+    private void addMoviesFragment() {
+        changeFragment(MoviesFragment.newInstance(), R.id.fragmentContainer);
     }
 
     @Override
