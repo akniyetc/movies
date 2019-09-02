@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">movies</string>
+    <string name="error_message_network">No Network Connection!</string>
+    <string name="error_message_server">Server is not available!</string>
+    <string name="error_message_unknown">Unknown Error!</string>
+    <string name="action_search">Search</string>
+    <string name="movie_poster">Movie poster</string>
+</resources>
