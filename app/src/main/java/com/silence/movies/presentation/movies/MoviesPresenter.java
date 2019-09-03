@@ -18,8 +18,6 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
     private MoviesInteractor moviesInteractor;
     private ErrorHandler errorHandler;
 
-    private Disposable searchDisposable;
-
     @Inject
     public MoviesPresenter(MoviesInteractor moviesInteractor, ErrorHandler errorHandler) {
         this.moviesInteractor = moviesInteractor;
@@ -37,11 +35,11 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
         getViewState().showLoading(true);
         getViewState().showStartSearchMessage(false);
 
-        searchDisposable = moviesInteractor.getMovies(text)
-                        .subscribe(
-                                this::handleMovies,
-                                this::handleError
-                        );
+        Disposable searchDisposable = moviesInteractor.getMovies(text)
+                .subscribe(
+                        this::handleMovies,
+                        this::handleError
+                );
 
         connect(searchDisposable);
     }
