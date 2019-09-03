@@ -112,7 +112,7 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                moviesPresenter.search(s);
+                moviesPresenter.searchMovies(s);
                 closeKeyboard();
 
                 SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(),

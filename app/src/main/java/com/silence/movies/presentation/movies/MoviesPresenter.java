@@ -31,7 +31,7 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
         getViewState().showStartSearchMessage(true);
     }
 
-    public void search(String text) {
+    public void searchMovies(String text) {
         getViewState().showLoading(true);
         getViewState().showStartSearchMessage(false);
 
