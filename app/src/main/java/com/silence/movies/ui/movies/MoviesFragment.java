@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -28,6 +27,7 @@ import com.silence.movies.domain.entity.Movie;
 import com.silence.movies.presentation.movies.MoviesPresenter;
 import com.silence.movies.presentation.movies.MoviesView;
 import com.silence.movies.ui.base.BaseFragment;
+import com.silence.movies.ui.base.GridAutoFitLayoutManager;
 import com.silence.movies.ui.base.SearchHistoryProvider;
 
 import java.util.List;
@@ -35,6 +35,8 @@ import java.util.List;
 import butterknife.BindView;
 
 public class MoviesFragment extends BaseFragment implements MoviesView {
+
+    private static final int MOVIE_POSTER_WIDTH = 280;
 
     @BindView(R.id.rvMovies)
     RecyclerView rvMovies;
@@ -77,7 +79,8 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
 
     private void initViews() {
         moviesAdapter = new MoviesAdapter();
-        rvMovies.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+
+        rvMovies.setLayoutManager(new GridAutoFitLayoutManager(getContext(), MOVIE_POSTER_WIDTH));
         rvMovies.setAdapter(moviesAdapter);
     }
 
@@ -155,14 +158,5 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
         super.onDestroy();
 
         App.getInstance().closeMoviesComponent();
-    }
-
-    public static MoviesFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        MoviesFragment fragment = new MoviesFragment();
-        fragment.setArguments(args);
-        return fragment;
     }
 }

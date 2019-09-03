@@ -28,7 +28,6 @@ public class MoviesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         initToolbar();
-        addMoviesFragment();
     }
 
     private void initToolbar() {
@@ -37,10 +36,6 @@ public class MoviesActivity extends BaseActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
-    }
-
-    private void addMoviesFragment() {
-        changeFragment(MoviesFragment.newInstance(), R.id.fragmentContainer);
     }
 
     @Override

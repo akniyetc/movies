@@ -17,5 +17,6 @@ public interface MoviesView extends MvpView {
     void showMovies(List<Movie> movies);
     void showLoading(Boolean show);
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void showStartSearchMessage(Boolean show);
 }
