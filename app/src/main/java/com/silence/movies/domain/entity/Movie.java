@@ -3,6 +3,8 @@ package com.silence.movies.domain.entity;
 import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 @Generated("com.robohorse.robopojogenerator")
 public class Movie {
 
@@ -69,7 +71,24 @@ public class Movie {
 		return title;
 	}
 
-	@Override
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movie)) return false;
+        Movie movie = (Movie) o;
+        return getType().equals(movie.getType()) &&
+                getYear().equals(movie.getYear()) &&
+                getImdbID().equals(movie.getImdbID()) &&
+                Objects.equals(getPoster(), movie.getPoster()) &&
+                getTitle().equals(movie.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), getYear(), getImdbID(), getPoster(), getTitle());
+    }
+
+    @Override
  	public String toString(){
 		return 
 			"Movie{" +
