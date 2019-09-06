@@ -34,7 +34,7 @@ import butterknife.BindView;
 
 public class MoviesFragment extends BaseFragment implements MoviesView {
 
-    private static final int MOVIE_POSTER_WIDTH = 280;
+    private static final int MOVIE_POSTER_WIDTH = 300;
 
     @BindView(R.id.rvMovies)
     RecyclerView rvMovies;
