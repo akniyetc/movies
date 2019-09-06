@@ -35,7 +35,6 @@ public class MoviesInteractorTest {
 
     @Before
     public void setUp() {
-
         testMovieModel = new Movie("type", "year", "444", "posterUrl", "movie");
 
         moviesRepository = Mockito.mock(MoviesRepository.class);
@@ -55,7 +54,6 @@ public class MoviesInteractorTest {
         testObserver.assertNoErrors()
                 .assertValue(testMoviesModel)
                 .assertComplete();
-
     }
 
     @Test
@@ -72,5 +70,4 @@ public class MoviesInteractorTest {
         testObserver.assertError(exception)
                 .assertNoValues();
     }
-
 }

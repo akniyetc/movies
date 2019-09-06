@@ -1,6 +1,7 @@
 package com.silence.movies;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 
 import com.silence.movies.data.MainService;
 import com.silence.movies.data.MoviesRepositoryImpl;
@@ -51,7 +52,8 @@ public class MoviesRepositoryTest {
         mainService = Mockito.mock(MainService.class);
 
         Context context = Mockito.mock(Context.class);
-        networkHandler = new TestNetworkHandler(context);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkHandler = new TestNetworkHandler(connectivityManager);
 
         moviesRepository = new MoviesRepositoryImpl(mainService, networkHandler);
     }
@@ -103,8 +105,8 @@ public class MoviesRepositoryTest {
 
         private boolean isConnected;
 
-        TestNetworkHandler(Context context) {
-            super(context);
+        public TestNetworkHandler(ConnectivityManager connectivityManager) {
+            super(connectivityManager);
         }
 
         void setConnected(boolean connected) {
@@ -112,7 +114,7 @@ public class MoviesRepositoryTest {
         }
 
         @Override
-        public Boolean isConnected() {
+        public boolean hasNetworkConnection() {
             return isConnected;
         }
     }
