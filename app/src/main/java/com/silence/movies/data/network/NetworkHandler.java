@@ -1,50 +1,46 @@
 package com.silence.movies.data.network;
 
-import android.content.Context;
+import android.Manifest;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.annotation.RequiresPermission;
+
 import javax.inject.Inject;
 
 public class NetworkHandler {
 
-    private Context context;
+    private ConnectivityManager cm;
 
     @Inject
-    NetworkHandler(Context context) {
-        this.context = context.getApplicationContext();
+    public NetworkHandler(ConnectivityManager connectivityManager) {
+        this.cm = connectivityManager;
     }
 
-    public Boolean isConnected() {
-
-        boolean result = false;
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public boolean hasNetworkConnection() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (cm != null) {
-                NetworkCapabilities capabilities = cm.getNetworkCapabilities(cm.getActiveNetwork());
-                if (capabilities != null) {
-                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                        result = true;
-                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                        result = true;
-                    }
-                }
-            }
+            NetworkCapabilities nc = cm.getNetworkCapabilities(cm.getActiveNetwork());
+            return hasNetworkConnection(nc);
         } else {
-            if (cm != null) {
-                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                if (activeNetwork != null) {
-                    // connected to the internet
-                    if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
-                        result = true;
-                    } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                        result = true;
-                    }
-                }
-            }
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            return hasNetworkConnection(networkInfo);
         }
-        return result;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private boolean hasNetworkConnection(@Nullable NetworkCapabilities nc) {
+        return nc != null && (
+                nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+                        nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+        );
+    }
+
+    private boolean hasNetworkConnection(@Nullable NetworkInfo networkInfo) {
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

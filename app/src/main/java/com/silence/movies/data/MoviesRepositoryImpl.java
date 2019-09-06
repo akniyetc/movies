@@ -18,14 +18,14 @@ public class MoviesRepositoryImpl implements MoviesRepository {
     private NetworkHandler networkHandler;
 
     @Inject
-    MoviesRepositoryImpl(MainService service, NetworkHandler networkHandler) {
+    public MoviesRepositoryImpl(MainService service, NetworkHandler networkHandler) {
         this.service = service;
         this.networkHandler = networkHandler;
     }
 
     @Override
     public Single<List<Movie>> getMovies(String search) {
-        if (networkHandler.isConnected()) {
+        if (networkHandler.hasNetworkConnection()) {
             return service.getMovies(search)
                     .map(Movies::getSearch);
         } else {

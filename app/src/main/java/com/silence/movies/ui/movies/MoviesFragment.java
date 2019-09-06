@@ -6,13 +6,13 @@ import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +46,7 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
     ProgressBar progressMovies;
 
     @BindView(R.id.contentMovies)
-    FrameLayout contentMovies;
+    ConstraintLayout contentMovies;
 
     @Inject
     SearchableInfo searchableInfo;

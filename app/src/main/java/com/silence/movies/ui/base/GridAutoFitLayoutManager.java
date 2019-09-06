@@ -19,7 +19,7 @@ public class GridAutoFitLayoutManager extends GridLayoutManager {
         setColumnWidth(checkedColumnWidth(context, columnWidth));
     }
 
-    private int checkedColumnWidth(@NonNull final Context context,final int columnWidth) {
+    private int checkedColumnWidth(@NonNull final Context context, final int columnWidth) {
         if (columnWidth <= 0) {
             /* Set default columnWidth value (48dp here). It is better to move this constant
             to static constant on top, but we need context to convert it to dp, so can't really
@@ -30,7 +30,7 @@ public class GridAutoFitLayoutManager extends GridLayoutManager {
         return columnWidth;
     }
 
-    public void setColumnWidth(final int newColumnWidth) {
+    private void setColumnWidth(final int newColumnWidth) {
         if (newColumnWidth > 0 && newColumnWidth != columnWidth) {
             columnWidth = newColumnWidth;
             isColumnWidthChanged = true;
@@ -38,22 +38,30 @@ public class GridAutoFitLayoutManager extends GridLayoutManager {
     }
 
     @Override
-    public void onLayoutChildren(@NonNull final RecyclerView.Recycler recycler, @NonNull final RecyclerView.State state) {
-        final int width = getWidth();
-        final int height = getHeight();
-        if (columnWidth > 0 && width > 0 && height > 0 && (isColumnWidthChanged || lastWidth != width || lastHeight != height)) {
-            final int totalSpace;
-            if (getOrientation() == VERTICAL) {
-                totalSpace = width - getPaddingRight() - getPaddingLeft();
-            } else {
-                totalSpace = height - getPaddingTop() - getPaddingBottom();
-            }
-            final int spanCount = Math.max(1, totalSpace / columnWidth);
+    public void onLayoutChildren(@NonNull final RecyclerView.Recycler recycler,
+                                 @NonNull final RecyclerView.State state) {
+
+        if (columnWidth > 0 && getWidth() > 0 && getHeight() > 0
+                && (isColumnWidthChanged || lastWidth != getWidth() || lastHeight != getHeight())) {
+
+            final int spanCount = calculateSpanCount(1, getTotalSpace());
             setSpanCount(spanCount);
             isColumnWidthChanged = false;
         }
-        lastWidth = width;
-        lastHeight = height;
+        lastWidth = getWidth();
+        lastHeight = getHeight();
         super.onLayoutChildren(recycler, state);
+    }
+
+    private int getTotalSpace(){
+        if (getOrientation() == VERTICAL) {
+            return getWidth() - getPaddingRight() - getPaddingLeft();
+        } else {
+            return getHeight() - getPaddingTop() - getPaddingBottom();
+        }
+    }
+
+    private int calculateSpanCount(int first, int totalSpace) {
+        return Math.max(first, totalSpace / columnWidth);
     }
 }

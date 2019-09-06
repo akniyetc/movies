@@ -1,7 +1,11 @@
 package com.silence.movies.di.module;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+
 import com.silence.movies.BuildConfig;
 import com.silence.movies.data.MainService;
+import com.silence.movies.data.network.NetworkHandler;
 
 import java.util.concurrent.TimeUnit;
 
@@ -66,5 +70,17 @@ public class NetworkModule {
     @Provides
     MainService provideMainService(Retrofit retrofit) {
         return retrofit.create(MainService.class);
+    }
+
+    @Singleton
+    @Provides
+    NetworkHandler provideNetworkHandler(ConnectivityManager connectivityManager) {
+        return new NetworkHandler(connectivityManager);
+    }
+
+    @Singleton
+    @Provides
+    ConnectivityManager provideConnectivityManager(Context context) {
+        return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 }
