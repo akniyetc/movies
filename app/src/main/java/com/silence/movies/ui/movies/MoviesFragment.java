@@ -95,7 +95,6 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
         inflater.inflate(R.menu.movies, menu);
 
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
         searchView.setSearchableInfo(searchableInfo);
 
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
