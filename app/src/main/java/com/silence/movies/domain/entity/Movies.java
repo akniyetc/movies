@@ -7,11 +7,13 @@ import com.google.gson.annotations.SerializedName;
 @Generated("com.robohorse.robopojogenerator")
 public class Movies{
 
+	public Movies(String response, List<Movie> movies) {
+		this.response = response;
+		this.search = movies;
+	}
+
 	@SerializedName("Response")
 	private String response;
-
-	@SerializedName("totalResults")
-	private String totalResults;
 
 	@SerializedName("Search")
 	private List<Movie> search;
@@ -22,14 +24,6 @@ public class Movies{
 
 	public String getResponse(){
 		return response;
-	}
-
-	public void setTotalResults(String totalResults){
-		this.totalResults = totalResults;
-	}
-
-	public String getTotalResults(){
-		return totalResults;
 	}
 
 	public void setSearch(List<Movie> search){
@@ -44,8 +38,7 @@ public class Movies{
  	public String toString(){
 		return 
 			"Movies{" + 
-			"response = '" + response + '\'' + 
-			",totalResults = '" + totalResults + '\'' + 
+			"response = '" + response + '\'' +
 			",search = '" + search + '\'' + 
 			"}";
 		}

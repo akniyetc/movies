@@ -18,7 +18,7 @@ public class MoviesRepositoryImpl implements MoviesRepository {
     private NetworkHandler networkHandler;
 
     @Inject
-    public MoviesRepositoryImpl(MainService service, NetworkHandler networkHandler) {
+    MoviesRepositoryImpl(MainService service, NetworkHandler networkHandler) {
         this.service = service;
         this.networkHandler = networkHandler;
     }

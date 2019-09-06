@@ -5,5 +5,5 @@ import io.reactivex.Scheduler;
 public interface SchedulersProvider {
     Scheduler io();
     Scheduler ui();
-    Scheduler computation();
+    Scheduler trampoline();
 }

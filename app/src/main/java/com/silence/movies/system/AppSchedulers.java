@@ -24,7 +24,7 @@ public class AppSchedulers implements SchedulersProvider {
     }
 
     @Override
-    public Scheduler computation() {
-        return Schedulers.computation();
+    public Scheduler trampoline() {
+        return Schedulers.trampoline();
     }
 }

@@ -19,17 +19,6 @@ public class GridAutoFitLayoutManager extends GridLayoutManager {
         setColumnWidth(checkedColumnWidth(context, columnWidth));
     }
 
-    public GridAutoFitLayoutManager(
-            @NonNull final Context context,
-            final int columnWidth,
-            final int orientation,
-            final boolean reverseLayout) {
-
-        /* Initially set spanCount to 1, will be changed automatically later. */
-        super(context, 1, orientation, reverseLayout);
-        setColumnWidth(checkedColumnWidth(context, columnWidth));
-    }
-
     private int checkedColumnWidth(@NonNull final Context context,final int columnWidth) {
         if (columnWidth <= 0) {
             /* Set default columnWidth value (48dp here). It is better to move this constant

@@ -6,6 +6,14 @@ import com.google.gson.annotations.SerializedName;
 @Generated("com.robohorse.robopojogenerator")
 public class Movie {
 
+	public Movie(String type, String year, String imdbID, String poster, String title) {
+		this.type = type;
+		this.year = year;
+		this.imdbID = imdbID;
+		this.poster = poster;
+		this.title = title;
+	}
+
 	@SerializedName("Type")
 	private String type;
 

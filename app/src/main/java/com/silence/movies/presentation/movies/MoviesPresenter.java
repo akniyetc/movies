@@ -46,7 +46,6 @@ public class MoviesPresenter extends BasePresenter<MoviesView> {
 
     private void handleMovies(List<Movie> movies) {
         getViewState().showLoading(false);
-        getViewState().showStartSearchMessage(false);
         getViewState().showMovies(movies);
     }
 

@@ -1,13 +1,10 @@
 package com.silence.movies.ui.movies;
 
-import android.app.SearchManager;
-import android.content.ComponentName;
-import android.content.Context;
+import android.app.SearchableInfo;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -28,9 +25,10 @@ import com.silence.movies.presentation.movies.MoviesPresenter;
 import com.silence.movies.presentation.movies.MoviesView;
 import com.silence.movies.ui.base.BaseFragment;
 import com.silence.movies.ui.base.GridAutoFitLayoutManager;
-import com.silence.movies.ui.base.SearchHistoryProvider;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -49,6 +47,12 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
 
     @BindView(R.id.contentMovies)
     FrameLayout contentMovies;
+
+    @Inject
+    SearchableInfo searchableInfo;
+
+    @Inject
+    SearchRecentSuggestions suggestions;
 
     private MoviesAdapter moviesAdapter;
 
@@ -90,12 +94,9 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
 
         inflater.inflate(R.menu.movies, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 
-        SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
-        ComponentName componentName = new ComponentName(getContext(), MoviesActivity.class);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
+        searchView.setSearchableInfo(searchableInfo);
 
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
@@ -115,8 +116,6 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
                 moviesPresenter.searchMovies(s);
                 closeKeyboard();
 
-                SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getContext(),
-                        SearchHistoryProvider.AUTHORITY, SearchHistoryProvider.MODE);
                 suggestions.saveRecentQuery(s, null);
                 return true;
             }
