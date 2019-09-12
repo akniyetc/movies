@@ -97,6 +97,11 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchableInfo);
 
+        listenSuggestions(searchView);
+        listenQueries(searchView);
+    }
+
+    private void listenSuggestions(SearchView searchView) {
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionSelect(int i) {
@@ -109,6 +114,9 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
                 return true;
             }
         });
+    }
+
+    private void listenQueries(SearchView searchView) {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
