@@ -84,7 +84,7 @@ public class MoviesFragment extends BaseFragment implements MoviesView {
     private void initViews() {
         moviesAdapter = new MoviesAdapter();
 
-        rvMovies.setLayoutManager(new GridAutoFitLayoutManager(getContext(), MOVIE_POSTER_WIDTH));
+        rvMovies.setLayoutManager(new GridAutoFitLayoutManager(requireContext(), MOVIE_POSTER_WIDTH));
         rvMovies.setAdapter(moviesAdapter);
     }
 

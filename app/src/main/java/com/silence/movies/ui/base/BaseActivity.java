@@ -25,6 +25,9 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mUnBinder.unbind();
+
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+        }
     }
 }
